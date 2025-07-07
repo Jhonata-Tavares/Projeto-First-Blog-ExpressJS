@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "nodemon": "^3.1.10",
+    "prompt-sync": "^4.2.0",
+    "sequelize": "^6.37.7"
+  }
+}
