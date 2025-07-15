@@ -4,6 +4,7 @@ import expressHandlebars from 'express-handlebars';
 import { Sequelize } from 'sequelize';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import bodyParser from 'body-parser';
 
 // Definindo as variáveis necessárias para o funcionamento da API
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +15,9 @@ const app = express();
 app.engine('handlebars', expressHandlebars.engine({ defaultLayout: 'main' }));
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'handlebars');
+// Configurando o Body Parser para processar os dados do formulário
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 // Estabelecendo a conexão com o banco de dados MySQL.
 const sequelize = new Sequelize('blog', 'root', '@Jhonata123', {
@@ -24,6 +28,10 @@ const sequelize = new Sequelize('blog', 'root', '@Jhonata123', {
 // Rotas
 app.get('/cad', function(req, res){
     res.render('formulario')
+});
+
+app.post('/add', function(req, res){
+    res.send('Título: ' + req.body.titulo + '<br><br>Conteúdo: ' + req.body.conteudo)
 });
 
 app.listen(8081, function(){
